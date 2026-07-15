@@ -1,0 +1,25 @@
+# Environment
+.env
+.venv/
+venv/
+env/
+
+# Data (crawled content & vector store — large, regenerable)
+data/
+*.pdf
+*.docx
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
