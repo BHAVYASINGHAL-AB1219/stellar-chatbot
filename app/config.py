@@ -61,6 +61,7 @@ class Settings(BaseSettings):
     crawl_max_pages: int = 500
     crawl_delay: float = 1.0
     crawl_user_agent: str = "StellarCollegeBot/1.0 (+college-chatbot)"
+    extra_seed_urls: str = ""
 
     # ---- Storage ----
     data_dir: str = "./data"

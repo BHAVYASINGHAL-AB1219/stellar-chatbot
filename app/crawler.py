@@ -216,6 +216,15 @@ class Crawler:
         queue: deque[str] = deque([self.base_url])
         self.queued.add(self.base_url)
 
+        if getattr(settings, "extra_seed_urls", ""):
+            for url in settings.extra_seed_urls.split(","):
+                url = url.strip()
+                if url:
+                    norm = self._normalize(url)
+                    if norm not in self.queued:
+                        self.queued.add(norm)
+                        queue.append(norm)
+
         for sitemap_url in self._discover_sitemap_urls():
             norm = self._normalize(sitemap_url)
             if self._is_internal(norm) and norm not in self.queued:

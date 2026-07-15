@@ -162,6 +162,7 @@ def health() -> HealthResponse:
 
 @app.post("/chat", response_model=ChatResponse)
 def chat(req: ChatRequest) -> ChatResponse:
+    logger.info("Received chat request payload: %s", req.model_dump_json())
     # Cap history length to prevent abuse / context overflow
     history = (req.history or [])[-MAX_HISTORY_MESSAGES:]
     result = answer(question=req.question, history=history or None, top_k=req.top_k)
@@ -173,11 +174,12 @@ def chat_stream(req: ChatRequest) -> StreamingResponse:
     """
     Streams the answer as Server-Sent Events.
     Format:
-        data: {"token": "..."}\\n\\n
+        data: {"token": "..."}\n\n
         ...
-        data: {"sources": [...]}\\n\\n
-        data: [DONE]\\n\\n
+        data: {"sources": [...]}\n\n
+        data: [DONE]\n\n
     """
+    logger.info("Received streaming chat request payload: %s", req.model_dump_json())
     # Cap history length
     history = (req.history or [])[-MAX_HISTORY_MESSAGES:]
 

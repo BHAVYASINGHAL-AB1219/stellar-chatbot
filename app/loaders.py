@@ -138,7 +138,7 @@ def load_html(path: Path, source_url: Optional[str] = None) -> list[dict]:
     content_parts: list[str] = []
 
     # 1. NIT Sikkim specific: tab-contents holds the real page content.
-    tab_contents = soup.select("div.tab-contents")
+    tab_contents = soup.select("div.tab-contents, div.tabcontent")
     if tab_contents:
         for tc in tab_contents:
             content_parts.append(tc.get_text(separator="\n", strip=True))
